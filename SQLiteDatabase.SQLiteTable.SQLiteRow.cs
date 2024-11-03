@@ -160,7 +160,7 @@ namespace ExperimentalSQLite {
                         return false;
                     
                     foreach (IDbCell ownCell in ownKeys) {
-                        IDbCell? otherCell = otherKeys.FirstOrDefault(cell => cell?.ColumnName == ownCell.ColumnName, null);
+                        IDbCell? otherCell = otherKeys.FirstOrDefault(cell => cell?.ColumnName == ownCell.ColumnName);
                         if (otherCell == null || otherCell.Value != ownCell.Value)
                             return false;
                     }

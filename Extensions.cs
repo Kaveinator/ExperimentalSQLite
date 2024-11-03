@@ -30,5 +30,8 @@ namespace ExperimentalSQLite {
                     throw new NotSupportedException($"Unsupported DbType: {dbType}");
             }
         }
+
+        public static bool HasAnyFlags<T>(this T obj, params T[] array) where T : Enum
+            => array.Any(flag => obj.HasFlag(flag));
     }
 }

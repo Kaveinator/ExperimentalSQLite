@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,7 +94,7 @@ namespace ExperimentalSQLite {
             // Check if there is already RegisterTable called that contains the same table.TableName
             if (table is null)
                 throw new NullReferenceException($"Failed to register table. tableInitilizer returned a null table[ Database: {typeof(TDatabase).FullName}; table: {typeof(TTable).FullName} ]");
-            ITable? cachedTable = RegistedTables.FirstOrDefault(otherTable => table.TableName == otherTable?.TableName, null);
+            ITable? cachedTable = RegistedTables.FirstOrDefault(otherTable => table.TableName == otherTable?.TableName);
             if (cachedTable != null)
                 throw new Exception($"Failed to register table '{table.TableName}'. Another table with that name was already registed with that name. [ table: {typeof(TTable).FullName}; cachedTable: {cachedTable.GetType().FullName} ]");
             TRow schema = table.Schema = schemaConstructor?.Invoke() ?? table.ConstructRow();
